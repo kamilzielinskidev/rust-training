@@ -1,4 +1,5 @@
 #![feature(int_roundings)]
+use std::{error, io};
 
 fn median(arr: &Vec<usize>) -> usize {
     let len = arr.len();
@@ -46,7 +47,47 @@ fn second() {
     println!("{}", pig_latin(String::from(test2)));
 }
 
+fn command() -> Result<(String, Option<String>), Box<dyn error::Error>> {
+    println!("Please enter a command:");
+
+    let mut user_command = String::new();
+    io::stdin().read_line(&mut user_command)?;
+
+    let splitted_command = user_command.split_ascii_whitespace().collect::<Vec<_>>();
+
+    let user_command_command_option = splitted_command.get(0);
+    let user_command_user_option = splitted_command.get(1);
+
+    user_command_command_option.map_or_else(
+        || panic!("Cannot read some value."),
+        |v1| {
+            return Ok((
+                v1.to_string(),
+                user_command_user_option.map(|v| v.to_string()),
+            ));
+        },
+    )
+}
+
+fn third() {
+    let mut teams: Vec<String> = Vec::new();
+
+    loop {
+        match command() {
+            Err(err) => panic!("{}", err),
+            Ok((command_command, command_user)) => match command_command.as_str() {
+                "add" => teams.push(command_user.unwrap()),
+                "list" => {
+                    println!("{:?}", teams)
+                }
+                _ => panic!("Something wrong with command."),
+            },
+        }
+    }
+}
+
 fn main() {
     first();
     second();
+    third();
 }
