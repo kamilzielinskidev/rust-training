@@ -52,8 +52,7 @@ pub fn solution_first_part() -> Result<usize, Box<dyn error::Error>> {
 
     let paper_size = dimensions_map?.iter().fold(0, |acc, next| acc + next);
 
-    println!("{:?}", paper_size);
-    Ok(1)
+    Ok(paper_size)
 }
 
 fn get_box_perimeter(dimensions: &Dimensions) -> usize {
@@ -94,6 +93,5 @@ pub fn solution_second_part() -> Result<usize, Box<dyn error::Error>> {
 
     let paper_size = dimensions_map?.iter().fold(0, |acc, next| acc + next);
 
-    println!("{:?}", paper_size);
     Ok(paper_size)
 }

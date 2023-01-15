@@ -1,4 +1,4 @@
-use aoc_2015::day_2::solution_second_part;
+use aoc_2015::day_3::solution_second_part;
 
 pub mod aoc_2015;
 
