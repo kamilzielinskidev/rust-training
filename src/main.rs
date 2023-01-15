@@ -1,9 +1,7 @@
-#![feature(int_roundings)]
-
-use aoc_2015::day_1::solution_second_part;
+use aoc_2015::day_2::solution_second_part;
 
 pub mod aoc_2015;
 
 fn main() {
-    solution_second_part().unwrap();
+    println!("{:?}", solution_second_part())
 }
