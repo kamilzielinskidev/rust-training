@@ -1,7 +1,9 @@
-use aoc_2015::day_5::solution_second_part;
+#![feature(try_trait_v2)]
+
+use aoc_2015::day_6::solution_first_part;
 
 pub mod aoc_2015;
 
 fn main() {
-    println!("{:?}", solution_second_part())
+    println!("{:?}", solution_first_part())
 }
