@@ -11,7 +11,8 @@ impl IsNumeric for String {
     }
 }
 
-pub fn solution_first_part() -> Result<usize, Box<dyn Error>> {
+pub fn solution_first_and_second_part() -> Result<usize, Box<dyn Error>> {
+    let mut round = 0;
     let mut instructions = read_to_string("data")?
         .lines()
         .map(|v| v.to_string())
@@ -21,11 +22,19 @@ pub fn solution_first_part() -> Result<usize, Box<dyn Error>> {
 
     loop {
         println!("{}", instructions.len());
-        if instructions.len() == 0 {
+        if values.contains_key(&"a".to_string()) && round == 1 {
             break;
         }
-        if values.contains_key(&"a".to_string()) {
-            break;
+        if values.contains_key(&"a".to_string()) && round == 0 {
+            let a_value = *values.get(&"a".to_string()).ok_or("")?;
+            values.clear();
+            values.insert("b".to_string(), a_value);
+            round += 1;
+            instructions = read_to_string("data")?
+                .lines()
+                .map(|v| v.to_string())
+                .collect::<Vec<_>>();
+            continue;
         }
         for (i, instruction_string) in instructions.iter().enumerate() {
             let matches = Regex::new(r"(\w+)")?
