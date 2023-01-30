@@ -27,3 +27,26 @@ pub fn solution_first_part() -> Result<usize, Box<dyn Error>> {
 
     Ok(amount_of_memory_characters - amount_of_string_characters)
 }
+
+fn enchance_line(string_line: &String) -> Result<String, Box<dyn Error>> {
+    let easy_enchanced_str = string_line.replace("\\", "\\\\").replace("\"", "\\\"");
+
+    Ok(easy_enchanced_str)
+}
+
+pub fn solution_second_part() -> Result<usize, Box<dyn Error>> {
+    let amount_of_memory_characters = read_to_string("data")?
+        .lines()
+        .map(|v| v.as_bytes().len())
+        .fold(0 as usize, |acc, v| acc + v);
+
+    let amount_of_string_characters = read_to_string("data")?
+        .lines()
+        .map(|v| v.to_string())
+        .map(|v| enchance_line(&v).unwrap())
+        .map(|v| "\"".to_string() + v.as_str() + "\"")
+        .map(|v| v.len())
+        .fold(0 as usize, |acc, v| acc + v);
+
+    Ok(amount_of_string_characters - amount_of_memory_characters)
+}
