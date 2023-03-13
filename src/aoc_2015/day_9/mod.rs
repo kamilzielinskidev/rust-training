@@ -1,6 +1,5 @@
 use regex::Regex;
 use std::collections::HashMap;
-use std::path;
 use std::{error::Error, fs::read_to_string};
 
 type Graph = HashMap<String, HashMap<String, i32>>;
